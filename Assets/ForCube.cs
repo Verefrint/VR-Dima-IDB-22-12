@@ -6,17 +6,16 @@ public class ForCube : MonoBehaviour
 {
     public int a;
     public int b;
-    public int c=0;
+    public int c = 0;
     public GameObject cylinder;
     public Text x;
     public float Speed = 10f;
+
    
-    public GameObject cam;
-    public GameObject bcam;
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -32,7 +31,7 @@ public class ForCube : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.down *5* Speed * Time.deltaTime);
+            transform.Rotate(Vector3.down * 5 * Speed * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D))
         {
@@ -43,14 +42,13 @@ public class ForCube : MonoBehaviour
 
         if (c <= 0)
         {
-            cam.SetActive(true);
-            bcam.SetActive(false);
+           
             this.gameObject.SetActive(false);
             x.text = "Game Over";
         }
         else
         {
-            
+
             x.text = c.ToString();
         }
 
@@ -63,10 +61,30 @@ public class ForCube : MonoBehaviour
     }
     private void OnCollisionExit(Collision collision)
     {
-        Debug.Log("CEN");
+        Debug.Log("CET");
         this.gameObject.GetComponent<Renderer>().material.color = Color.white;
+
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        Debug.Log("CS");
         
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("TE");
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("TX");
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("TS");
+    }
+    public void heal()
+    {
+        c = 5;
+    }
 }
